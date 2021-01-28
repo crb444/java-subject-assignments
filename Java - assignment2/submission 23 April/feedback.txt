@@ -1,0 +1,851 @@
+============================================
+vis/result.rtx
+16:38:02_Monday_23_April_2018
+============================================
+Feedback:
+	Your program ("Nimsys.java") has been submitted successfully.
+	Compiling your program with "javac"...
+	Your program has been result.rtxd successfully :-)
+Now, it's your responsibility to test your program for correctness!
+Here is a simple test case, and the results:
+============================================
+Test for input file: in1
+Expected results:							Your results:
+Welcome to Nim							     |	Welcome to Nim.
+
+$									$
+$									$
+$									$
+$									$
+$									$
+$george,George,Washington,0 games,0 wins			     |	$
+jadams,John,Adams,0 games,0 wins				     |	Username:george Name:Washington Last Name:George Games played:0 Game
+jmadison,James,Madison,0 games,0 wins				     |
+jmonroe,James,Monroe,0 games,0 wins				     |	Username:jadams Name:Adams Last Name:John Games played:0 Games won:0
+tom,Thomas,Jefferson,0 games,0 wins				     |
+								     >	Username:tom Name:Jefferson Last Name:Thomas Games played:0 Games wo
+								     >
+								     >	Username:jmadison Name:Madison Last Name:James Games played:0 Games 
+
+$jmadison,James,Madison,0 games,0 wins				     |	Username:jmonroe Name:Monroe Last Name:James Games played:0 Games wo
+
+$									$
+								     >	Username:jmadison Name:Madison Last Name:James Games played:0 Games 
+								     >	$
+Oops, your results seem to be INCORRECT :-(
+============================================
+Test for input file: in2
+Expected results:							Your results:
+Welcome to Nim							     |	Welcome to Nim.
+
+$									$
+$The player already exists.						$The player already exists.
+
+$									$
+$gbush,George,Bush,0 games,0 wins				     <
+george,George,Washington,0 games,0 wins				     <
+								     <
+$									$
+								     >	Username:george Name:Washington Last Name:George Games played:0 Game
+								     >
+								     >	Username:gbush Name:Bush Last Name:George Games played:0 Games won:0
+								     >
+								     >	$
+Oops, your results seem to be INCORRECT :-(
+============================================
+Test for input file: in3
+Expected results:							Your results:
+Welcome to Nim							     |	Welcome to Nim.
+
+$									$
+$									$
+$									$
+$george,George,Washington,0 games,0 wins			     |	$
+jadams,John,Adams,0 games,0 wins				     |	Username:george Name:Washington Last Name:George Games played:0 Game
+tom,Thomas,Jefferson,0 games,0 wins				     <
+
+$The player does not exist.					     |	Username:jadams Name:Adams Last Name:John Games played:0 Games won:0
+
+$								     |	Username:tom Name:Jefferson Last Name:Thomas Games played:0 Games wo
+$george,George,Washington,0 games,0 wins			     <
+jadams,John,Adams,0 games,0 wins				     <
+
+$Are you sure you want to remove all players? (y/n)		     |	$The player does not exist.
+								     >	$$
+								     >	Username:george Name:Washington Last Name:George Games played:0 Game
+
+								     >	Username:jadams Name:Adams Last Name:John Games played:0 Games won:0
+								     >
+								     >	$Are you sure you want to remove all users? (y/n)
+$									$
+$								     /	$
+
+Oops, your results seem to be INCORRECT :-(
+============================================
+Test for input file: in4
+Expected results:							Your results:
+Welcome to Nim							     |	Welcome to Nim.
+
+$									$
+$jcarter,Jimmy,Carter,0 games,0 wins				     |	$
+								     >	Username:jcarter Name:Carter Last Name:Jimmy Games played:0 Games wo
+
+$The player does not exist.						$The player does not exist.
+								     >	$$
+								     >	Username:jcarter Name:Carter Last Name:James Games played:0 Games wo
+
+$								     |	$$
+$jcarter,James,Carter,0 games,0 wins				     <
+								     <
+$									$
+$									$
+$								     |	Username:george Name:Washington Last Name:George Games played:0 Game
+$george,George,Washington,0 games,0 wins			     |
+jadams,John,Adams,0 games,0 wins				     |	Username:jadams Name:Adams Last Name:John Games played:0 Games won:0
+
+$									$
+Initial stone count: 10							Initial stone count: 10
+Maximum stone removal: 3					     |	Maximum stone removal is: 3
+Player 1: George Washington					     |	Player 1: george
+Player 2: John Adams						     |	Player 2: jadams
+								     >	Washington
+								     >	Adams
+
+10 stones left: * * * * * * * * * *					10 stones left: * * * * * * * * * *
+George's turn - remove how many?				     |	Washington's turn - remove how many?
+
+8 stones left: * * * * * * * *						8 stones left: * * * * * * * *
+John's turn - remove how many?					     |	Adams's turn - remove how many?
+
+6 stones left: * * * * * *						6 stones left: * * * * * *
+George's turn - remove how many?				     |	Washington's turn - remove how many?
+
+4 stones left: * * * *							4 stones left: * * * *
+John's turn - remove how many?					     |	Adams's turn - remove how many?
+
+3 stones left: * * *							3 stones left: * * *
+George's turn - remove how many?				     |	Washington's turn - remove how many?
+
+2 stones left: * *							2 stones left: * *
+John's turn - remove how many?					     |	Adams's turn - remove how many?
+
+1 stones left: *							1 stones left: *
+George's turn - remove how many?				     |	Washington's turn - remove how many?
+
+Game Over								Game Over
+John Adams wins!						     |	Adams wins!
+
+$100% | 01 games | John Adams					     |	$16.666666666666664
+0%   | 01 games | George Washington				     |	16.666666666666664
+								     >	100.0
+								     >	100.0
+								     >	100.0
+
+$								     |
+								     >	General
+								     >
+								     >	Peter
+								     >
+								     >	Darth
+								     >
+								     >	Han
+								     >
+								     >	Luke
+								     >	$
+Oops, your results seem to be INCORRECT :-(
+============================================
+src/NimPlayer.java
+16:38:00_Monday_23_April_2018
+============================================
+import java.util.Arrays;
+
+
+public class NimPlayer {
+    String userName, firstName, lastName;
+    int gamesPlayed, gamesWon;
+    double winPercentage;
+
+    public NimPlayer (){
+        gamesPlayed = 0;
+        gamesWon = 0;
+        winPercentage = 0;
+    }
+
+    int playerChecker(NimPlayer[] players, String username, int playerCounter) {
+        int result = 0;
+        for (int i = 0; i < playerCounter; i++) {
+            if (players[i].userName.equalsIgnoreCase ( username.replaceAll ( " ","" ) )) {
+                result = 1;
+                break;
+            } else {
+                result = 2;
+            }
+        }
+        return result;
+    }
+
+    int retrievePlayerIndex(NimPlayer[] players, String userName, int playerCounter) {
+        int index = 0;
+        for(int i=0; i < playerCounter; i++) {
+            if(players[i].userName.equalsIgnoreCase ( userName.replaceAll ( " ","" ) )) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    int addPlayer(NimPlayer[] players, String username, String firstname, String lastname, int playerCounter) {
+        players[playerCounter] = new NimPlayer ();
+        players[playerCounter].userName = username;
+        players[playerCounter].firstName = firstname;
+        players[playerCounter].lastName = lastname;
+        playerCounter++;
+        return playerCounter;
+    }
+
+    void removePlayer(NimPlayer[] players, String username, int playerCounter) {
+        for (int i = 0; i < playerCounter; i++) {
+            if(players[i].userName.equalsIgnoreCase ( username.replaceAll ( " ","" ) )) {
+                players[i].userName = "null";
+                players[i].firstName = "null";
+                players[i].lastName = "null";
+            }
+        }
+    }
+
+    void removeAllPlayers(NimPlayer[] players, int playerCounter) {
+        for (int i = 0; i < playerCounter; i++) {
+            players[i].userName = "null";
+            players[i].firstName = "null";
+            players[i].lastName = "null";
+        }
+    }
+
+    void displayAllPlayers(NimPlayer[] players, int playerCounter) {
+        int i=0;
+        String empty = "null";
+
+        while (i < playerCounter) {
+            if (players[i].userName.equalsIgnoreCase ( empty )) {
+                i++;
+            } else {
+
+                System.out.print ( "\n" );
+                System.out.print ( "Username:" + players[i].userName + " " );
+                System.out.print ( "Name:" + players[i].firstName + " " );
+                System.out.print ( "Last Name:" + players[i].lastName + " " );
+                System.out.print ( "Games played:" + players[i].gamesPlayed + " " );
+                System.out.print ( "Games won:" + players[i].gamesWon + " " );
+                System.out.print ( "\n" );
+                i++;
+            }
+        }
+        System.out.print("\n");
+
+    }
+
+    /*
+
+    void rankingsAllPlayers(NimPlayer[] players, int playerCounter) {
+        double[] temporary = new double[50];
+
+
+        for(int i=0; i<playerCounter; i++) {
+            temporary[i] = players[i].winPercentage;
+        }
+
+
+        rankingAsc (temporary, playerCounter );
+
+        rankingPrinter ( temporary, players, playerCounter );
+
+
+
+
+        for(int i=0; i<playerCounter; i++) {
+            System.out.print(temporary[i]);
+            System.out.print("\n");
+        }
+
+
+
+    }
+
+    void rankingAsc(double[] temporary, int playerCounter) {
+        double minimumScore = 0, tmp=0;
+        int indexValue =0, index_counter=0;
+        int[] indexes = new int[50];
+
+
+        for(int i=0; i < playerCounter; i++) {
+            minimumScore = temporary[i];
+
+            for (int j = i; j < playerCounter; j++) {
+
+                if (temporary[j] <= minimumScore) {
+                    minimumScore = temporary[j];
+                    indexValue = j;
+                }
+            }
+
+            tmp = temporary[i];
+            temporary[i] = minimumScore;
+            temporary[indexValue] = tmp;
+        }
+
+    }
+
+    void rankingPrinter(double[] temporary, NimPlayer[] players, int playerCounter) {
+
+        String percentage = "%";
+        String line = "|";
+        int count =0, match=0;
+
+
+        for(int i=0; i < playerCounter; i++) {
+            for(int j=0; j < playerCounter; j++) {
+                if(temporary[i] == players[j].winPercentage) {
+                    match = j;
+                    count++;
+                }
+            }
+
+            if(count == 1) {
+                String playerPercentageInner = String.format ("%1.0f%%", players[match].winPercentage);
+                String playerPercentageOuter = String.format("%-6s",playerPercentageInner);
+                System.out.print(playerPercentageOuter);
+                System.out.print("|");
+                System.out.printf(" %02d games  ", players[match].gamesPlayed);
+                System.out.printf("%-4s", line);
+                System.out.print(players[match].firstName + " " + players[match].lastName);
+                System.out.print("\n");
+            } else {
+
+            }
+
+        }
+    }
+    */
+
+    void displayPlayer(NimPlayer[] players, String username, int playercounter) {
+        for(int i=0; i<playercounter ; i++) {
+            if(players[i].userName.equalsIgnoreCase ( username.replaceAll ( " ","" ) )) {
+                System.out.print ( "\n" );
+                System.out.print ( "Username:" + players[i].userName + " " );
+                System.out.print ( "Name:" + players[i].firstName + " " );
+                System.out.print ( "Last Name:" + players[i].lastName + " " );
+                System.out.print ( "Games played:" + players[i].gamesPlayed + " " );
+                System.out.print ( "Games won:" + players[i].gamesWon + " " );
+                System.out.print ( "\n" );
+            }
+        }
+    }
+
+    void editPlayer(NimPlayer[] players, String firstname, String lastname, int playerCounter) {
+        int result=0;
+        for (int i = 0; i < playerCounter; i++) {
+            if (players[i].firstName.equalsIgnoreCase ( firstname ) ||
+                    players[i].lastName.equalsIgnoreCase ( lastname )) {
+                players[i].firstName = firstname;
+                players[i].lastName = lastname;
+                result = 1;
+                break;
+            }
+        }
+        if(result==0) {
+            System.out.print ( "Player does not exist!" );
+        }
+    }
+
+    void resetAllStats (NimPlayer[] players, int playercounter) {
+        for(int i=0; i<playercounter; i++) {
+            players[i].gamesWon = 0;
+            players[i].gamesPlayed =0;
+        }
+    }
+
+    void resetPlayerStats(NimPlayer[] players, String username, int playercounter) {
+        for(int i=0; i<playercounter; i++) {
+            if(players[i].userName.equalsIgnoreCase ( username.replaceAll ( " ","" ) )) {
+                players[i].gamesPlayed =0;
+                players[i].gamesWon =0;
+                break;
+            }
+        }
+    }
+
+
+    public int removeStone (int stones, int removeStones, int upperBound) {
+        if (removeStones > upperBound) {
+            System.out.println("\nPlease enter a value within the bounds.");
+        } else {
+            stones = stones - removeStones;
+        }
+        return stones;
+    }
+
+
+
+    public int playAgain (String response) {
+        String no = "N";
+        String yes = "Y";
+
+        if (no.equalsIgnoreCase ( response )) {
+            System.exit ( 0 );
+            return 0;
+        } else if (yes.equalsIgnoreCase ( response )) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
+
+    public void stonePrinter (int stones) {
+        for (int i = 0; i < stones; i++) {
+            if(i == stones -1 ) {
+                System.out.print ("*");
+            } else {
+                System.out.print ("* ");
+            }
+        }
+    }
+
+    void rankingsAllPlayers(NimPlayer[] players, int playerCounter) {
+        double[] playerWinPercentages = new double[playerCounter];
+
+
+        for (int i = 0; i < playerCounter; i++) {
+            playerWinPercentages[i] = players[i].winPercentage;
+        }
+
+        arrange ( playerWinPercentages, playerCounter );
+
+        for (int i = 0; i < playerCounter; i++) {
+            System.out.print ( playerWinPercentages[i] + "\n" );
+        }
+        System.out.print ( "\n" );
+
+        duplicateTester ( playerWinPercentages, playerCounter, players );
+    }
+
+
+        void  arrange(double[] playerWinPercentages, int length) {
+
+        double min = 0, tmp =0;
+                int index=0, duplicates=0;
+
+        for(int i=0; i < length ; i++) {
+            min = playerWinPercentages[i];
+
+            for(int j=i; j < length ; j++) {
+                if(playerWinPercentages[j] <= min) {
+                    min = playerWinPercentages[j];
+                    index = j;
+                }
+            }
+
+            tmp = playerWinPercentages[i];
+            playerWinPercentages[i] = min;
+            playerWinPercentages[index] = tmp;
+
+        }
+
+    }
+
+    void duplicateTester(double[] playerWinPercentages, int length, NimPlayer[] players) {
+        int duplicates = 0, newIndex = 0;
+        double duplicateEntity = 0, value=0;
+
+        for (int i = 0; i < length; i++) {
+
+
+            for (int j = i+1; j < length; j++) {
+                if (playerWinPercentages[j] == playerWinPercentages[i]) {
+                    duplicates++;
+                    duplicateEntity = playerWinPercentages[i];
+
+                }
+            }
+
+            if (duplicates >= 1) {
+                newIndex = sortDuplicates ( playerWinPercentages, length, players, duplicateEntity );
+                duplicates =0;
+                duplicateEntity =0;
+                i=i+(newIndex-1);
+            } else {
+                value= playerWinPercentages[i];
+                printer (players, value, length );
+            }
+
+        }
+
+    }
+
+    int sortDuplicates(double[] playerWinPercentages, int length, NimPlayer[] players, double duplicateEntity) {
+        String[] names = new String[6];
+        int marker=0;
+
+        for(int i=0; i < length; i++) {
+            if(duplicateEntity == players[i].winPercentage) {
+                names[marker] = players[i].firstName;
+                marker++;
+            }
+        }
+
+        Arrays.sort(names, 0 , marker);
+
+        for(int i=0; i < marker; i++) {
+            System.out.print ( "\n" );
+            System.out.println(names[i]);
+        }
+
+        return marker;
+
+    }
+
+    void printer(NimPlayer[] players, double value, int length) {
+
+
+        for(int i=0; i < length; i++) {
+            if(value == players[i].winPercentage) {
+                System.out.print(players[i].firstName + "\n");
+                break;
+            }
+        }
+
+    }
+}
+============================================
+src/Nimsys.java
+16:38:00_Monday_23_April_2018
+============================================
+import java.util.Scanner;
+
+public class Nimsys {
+
+    public static void main(String[] args) {
+        String function, userinput;
+        String addPlayer = "addplayer", removePlayer = "removeplayer", displayPlayer = "displayplayer", editPlayer = "editplayer",
+                resetPlayer = "resetstats", exit = "exit", startgame = "startgame", rankings = "rankings";
+        int playerCounter = 0;
+
+        NimGame newGame = new NimGame ();
+
+        NimPlayer[] players = new NimPlayer[50];
+
+        NimPlayer playerFunctions = new NimPlayer ();
+
+        Scanner keyboard = new Scanner ( System.in );
+
+        System.out.println("Welcome to Nim.\n");
+
+
+
+        for (int k = 0; ; k++) {
+            System.out.print ( "$" );
+
+
+            function = keyboard.next ();
+
+
+            if (function.equalsIgnoreCase ( addPlayer )) {
+
+                userinput = keyboard.next ();
+
+                String[] input = userinput.split ( "," );
+                String username = input[0];
+                String firstname = input[1];
+                String lastname = input[2];
+
+                if (playerCounter == 0) {
+                    playerCounter = playerFunctions.addPlayer ( players, username, firstname, lastname, playerCounter );
+                } else {
+                    int result = playerFunctions.playerChecker ( players, username, playerCounter );
+                    if (result == 1) {
+                        System.out.print ( "The player already exists.\n" );
+                    }  else {
+                        playerCounter = playerFunctions.addPlayer ( players, username, firstname, lastname, playerCounter );
+                    }
+                }
+                System.out.print("\n");
+            } else if (function.equalsIgnoreCase ( displayPlayer )) {
+                userinput = keyboard.nextLine ();
+
+                if (userinput.isEmpty ()) {
+                    playerFunctions.displayAllPlayers ( players, playerCounter );
+                } else {
+                    String[] input = userinput.split ( "," );
+                    String username = input[0];
+
+                    int checkPlayer = playerFunctions.playerChecker ( players, username, playerCounter );
+
+                    if (checkPlayer == 1) {
+                        playerFunctions.displayPlayer ( players, username, playerCounter );
+                    } else if (checkPlayer == 2) {
+                        System.out.print ( "The player does not exist.\n" );
+                    }
+                }
+
+            } else if (function.equalsIgnoreCase ( removePlayer )) {
+                String userInput, yes = "y", no = "n", empty = " ";
+
+                userinput = keyboard.nextLine ();
+
+                if (userinput.isEmpty ()) {
+                    System.out.println ( "Are you sure you want to remove all users? (y/n)" );
+                    userInput = keyboard.nextLine ();
+                    if (yes.equalsIgnoreCase ( userInput )) {
+                        playerFunctions.removeAllPlayers ( players, playerCounter );
+                    }
+                } else {
+                    String[] input = userinput.split ( "," );
+                    String username = input[0];
+
+                    int checkPlayer = playerFunctions.playerChecker ( players, username, playerCounter );
+
+                    if (checkPlayer == 1) {
+                        playerFunctions.removePlayer ( players, username, playerCounter );
+                    } else if (checkPlayer == 2) {
+                        System.out.print ( "The player does not exist.\n" );
+                    }
+
+                }
+
+            } else if (function.equalsIgnoreCase ( editPlayer )) {
+                userinput = keyboard.next ();
+
+                String[] input = userinput.split ( "," );
+                String username = input[0];
+                String firstname = input[1];
+                String lastname = input[2];
+
+                int checkPlayer = playerFunctions.playerChecker ( players, username, playerCounter );
+                if (checkPlayer == 1) {
+                    playerFunctions.editPlayer ( players, firstname, lastname, playerCounter );
+                } else if (checkPlayer == 2) {
+                    System.out.print ( "The player does not exist.\n" );
+                }
+
+            } else if (function.equalsIgnoreCase ( resetPlayer )) {
+                String userInput, yes = "y", no = "n", empty = " ";
+
+                userinput = keyboard.nextLine ();
+
+                if (userinput.isEmpty ()) {
+                    System.out.println ( "Are you sure you want to reset all player statistics? (y/n)" );
+                    userInput = keyboard.nextLine ();
+                    if (yes.equalsIgnoreCase ( userInput )) {
+                        playerFunctions.resetAllStats ( players, playerCounter );
+                    }
+                } else {
+                    String[] input = userinput.split ( "," );
+                    String username = input[0];
+
+                    int checkPlayer = playerFunctions.playerChecker ( players, username, playerCounter );
+
+                    if (checkPlayer == 1) {
+                        playerFunctions.resetPlayerStats ( players, username, playerCounter );
+                    } else if (checkPlayer == 2) {
+                        System.out.print ( "The player does not exist.\n" );
+                    }
+
+                }
+            } else if ((function.equalsIgnoreCase ( startgame ))) {
+                int player_check = 0;
+
+                userinput = keyboard.next ();
+
+                String[] input = userinput.split ( "," );
+                String initialstones = input[0];
+                int initialStones = Integer.parseInt ( initialstones );
+                String upperbound = input[1];
+                int upperBound = Integer.parseInt ( upperbound );
+                String username1 = input[2];
+                String username2 = input[3];
+
+                int checkPlayer1 = playerFunctions.playerChecker ( players, username1, playerCounter );
+                if (checkPlayer1 == 1) {
+                    player_check ++;
+                } else if (checkPlayer1 == 2) {
+                    System.out.print ( "One player does not exist.\n" );
+                }
+
+                int checkPlayer2 = playerFunctions.playerChecker ( players, username2, playerCounter );
+                if (checkPlayer2 == 1) {
+                    player_check ++;
+                } else if (checkPlayer2 == 2) {
+                    System.out.print ( "One player does not exist.\n" );
+                }
+
+                if(player_check == 2) {
+
+                    int player1Index = playerFunctions.retrievePlayerIndex(players, username1, playerCounter);
+                    int player2Index = playerFunctions.retrievePlayerIndex(players, username2, playerCounter);
+
+                    System.out.println ( "\nInitial stone count: " + initialstones );
+                    System.out.println ( "Maximum stone removal is: " + upperbound );
+                    System.out.println ( "Player 1: " + username1 );
+                    System.out.println ( "Player 2: " + username2 );
+
+
+                    newGame.startNewGame ( initialStones, upperBound, player1Index, player2Index, keyboard, players );
+
+                    System.out.print("\n");
+                    keyboard.nextLine ();
+                }
+
+            } else if (function.equalsIgnoreCase ( rankings )) {
+
+
+
+                players[0] = new NimPlayer ();
+                players[0].userName = "lsky";
+                players[0].firstName = "Luke";
+                players[0].lastName = "Skywalker";
+                players[0].gamesPlayed = 10;
+                players[0].gamesWon = 10;
+                players[0].winPercentage = ((double)(players[0].gamesWon)/(double)(players[0].gamesPlayed))*100.0;
+
+
+
+                players[1] = new NimPlayer ();
+                players[1].userName = "dvad";
+                players[1].firstName = "Darth";
+                players[1].lastName = "Vader";
+                players[1].gamesPlayed = 20;
+                players[1].gamesWon = 20;
+                players[1].winPercentage = ((double)(players[1].gamesWon)/(double)(players[1].gamesPlayed))*100.0;
+
+                players[2] = new NimPlayer ();
+                players[2].userName = "hsolo";
+                players[2].firstName = "Han";
+                players[2].lastName = "Solo";
+                players[2].gamesPlayed = 6;
+                players[2].gamesWon = 6;
+                players[2].winPercentage = ((double)(players[2].gamesWon)/(double)(players[2].gamesPlayed))*100.0;
+
+                players[3] = new NimPlayer ();
+                players[3].userName = "ptco";
+                players[3].firstName = "Peter";
+                players[3].lastName = "McDoherty";
+                players[3].gamesPlayed = 6;
+                players[3].gamesWon = 1;
+                players[3].winPercentage = ((double)(players[3].gamesWon)/(double)(players[3].gamesPlayed))*100.0;
+
+                players[4] = new NimPlayer ();
+                players[4].userName = "sks";
+                players[4].firstName = "General";
+                players[4].lastName = "Snokes";
+                players[4].gamesPlayed = 6;
+                players[4].gamesWon = 1;
+                players[4].winPercentage = ((double)(players[4].gamesWon)/(double)(players[4].gamesPlayed))*100.0;
+
+                playerCounter = 5;
+
+
+                userinput = keyboard.nextLine ();
+
+                if (userinput.isEmpty ()) {
+                    playerFunctions.rankingsAllPlayers (players, playerCounter);
+                } else {
+                    String[] input = userinput.split ( "," );
+                    String username = input[0];
+
+                }
+
+            } else if ((function.equalsIgnoreCase ( exit ))) {
+                System.exit ( 0 );
+            } else {
+                break;
+            }
+        }
+
+    }
+}
+
+============================================
+src/NimGame.java
+16:38:00_Monday_23_April_2018
+============================================
+import java.util.Scanner;
+
+public class NimGame {
+
+    public void startNewGame(int initialStones, int upperBound, int player_1, int player_2, Scanner keyboard, NimPlayer[] players) {
+
+        int playerTurnCounter = 1;
+
+
+
+
+        NimPlayer player1 = new NimPlayer ();
+
+        NimPlayer player2 = new NimPlayer ();
+
+        NimPlayer system = new NimPlayer ();
+
+        System.out.println(players[player_1].firstName);
+        System.out.println(players[player_2].firstName);
+
+
+
+     /* HOW TO DO KEYBOARD INPUT
+     System.out.print("This is a test" + username1);
+        keyboard.nextLine ();
+        System.out.print("Enter name");
+        String name = keyboard.nextLine();
+        System.out.print("Your name is : " + name);
+
+*/
+                players[player_1].gamesPlayed++;
+                players[player_2].gamesPlayed++;
+
+                int stones = initialStones;
+
+                while (stones != 0) {
+                    System.out.printf ( "\n%d stones left: ", stones );
+                    system.stonePrinter (stones);
+
+
+
+                    for(int playerMoveCounter=0; ; playerMoveCounter++) {
+                        if(playerTurnCounter % 2 != 0) {
+                            System.out.println ( "\n" + players[player_1].firstName + "'s turn - remove how many?" );
+                        } else {
+                            System.out.println ( "\n" + players[player_2].firstName + "'s turn - remove how many?" );
+                        }
+
+                        int remove_stones = keyboard.nextInt ();
+
+                        int stones_new = players[player_1].removeStone ( stones, remove_stones, upperBound );
+
+
+                        if (stones_new != stones) {
+                            stones = stones_new;
+                            break;
+                        }
+
+                    }
+
+
+                    if (stones == 0) {
+                        System.out.println ( "\nGame Over" );
+
+                        if (playerTurnCounter % 2 != 0) {
+                            System.out.println ( players[player_2].firstName + " wins!" );
+                            players[player_2].gamesWon++;
+                        } else {
+                            System.out.println ( players[player_1].firstName + " wins!" );
+                            players[player_1].gamesWon++;
+                        }
+
+                        break;
+                    }
+
+                    playerTurnCounter++;
+                }
+    }
+}
+
